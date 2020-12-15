@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>767</width>
+    <height>464</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Log</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">/* 向在移动 */
+QTabWidget::tab-bar {
+	left:20px;
+}
+
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+					stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                               	stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:2px solid #C4C4C3;
+	border-bottom-color:red;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:8px;
+	padding:2px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}</string>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab1">
+      <attribute name="title">
+       <string>日志摘要</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QPlainTextEdit" name="summary_plainTextEdit"/>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="plot_groupBox">
+         <property name="title">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab2">
+      <attribute name="title">
+       <string>齿轮箱日志</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QPlainTextEdit" name="gb_plainTextEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab3">
+      <attribute name="title">
+       <string>发电机日志</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPlainTextEdit" name="ge_plainTextEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab4">
+      <attribute name="title">
+       <string>变桨日志</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QPlainTextEdit" name="pitch_plainTextEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab5">
+      <attribute name="title">
+       <string>变频日志</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QPlainTextEdit" name="co_plainTextEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab6">
+      <attribute name="title">
+       <string>液压日志</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QPlainTextEdit" name="hy_plainTextEdit"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_6">
+      <attribute name="title">
+       <string>传感器日志</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QPlainTextEdit" name="se_plainTextEdit"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../config/icon/ico.qrc"/>
+ </resources>
+ <connections/>
+</ui>

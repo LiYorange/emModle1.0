@@ -1,0 +1,2624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>线下预警模型</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../config/icon/ico.qrc">
+    <normaloff>:/图标/风机.png</normaloff>:/图标/风机.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QGroupBox" name="function_groupBox">
+      <property name="title">
+       <string>功能区</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="mode_label">
+           <property name="text">
+            <string>模式</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="mode_comboBox">
+           <property name="styleSheet">
+            <string notr="true">QComboBox::down-arrow:hover {
+ 	padding-left: 30px;
+    border-width: 1px;
+	image:url(:/下拉菜单/ZHX_下拉菜单.png);
+}
+
+</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>小文件绘图模式</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>大文件模式</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="select_project_label">
+           <property name="text">
+            <string>选择项目</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="select_project_comboBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox::down-arrow:hover {
+ 	padding-left: 30px;
+    border-width: 1px;
+	image:url(:/下拉菜单/ZHX_下拉菜单.png);
+}
+
+</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="plot_label">
+           <property name="text">
+            <string>绘图模式</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="plot_comboBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox::down-arrow:hover {
+ 	padding-left: 30px;
+    border-width: 1px;
+	image:url(:/下拉菜单/ZHX_下拉菜单.png);
+}
+
+</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>开</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>关</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="run_pushButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>运行</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>529</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,6">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>当前正在处理的文件：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="run_file_name_label">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 0, 0);
+</string>
+           </property>
+           <property name="text">
+            <string>None</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="deal_groupBox">
+      <property name="title">
+       <string>处理区</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QTabWidget::pane {
+	border:1px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:2px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+	
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-4px;
+	margin-right:-4px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+         </property>
+         <property name="tabPosition">
+          <enum>QTabWidget::West</enum>
+         </property>
+         <property name="tabShape">
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex">
+          <number>5</number>
+         </property>
+         <property name="elideMode">
+          <enum>Qt::ElideNone</enum>
+         </property>
+         <property name="usesScrollButtons">
+          <bool>true</bool>
+         </property>
+         <property name="documentMode">
+          <bool>false</bool>
+         </property>
+         <property name="tabsClosable">
+          <bool>false</bool>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
+         <property name="tabBarAutoHide">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="gb_tab">
+          <attribute name="icon">
+           <iconset>
+            <normalon>:/模型/齿轮箱.png</normalon>
+           </iconset>
+          </attribute>
+          <attribute name="title">
+           <string>齿轮箱预警模型</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QGroupBox" name="gb_groupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,8">
+              <item>
+               <widget class="QListWidget" name="gb_listWidget">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="tabletTracking">
+                 <bool>false</bool>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="acceptDrops">
+                 <bool>false</bool>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QListWidget{
+	border:1px solid gray; color:black; 
+	CheckState:unchecked;
+}
+
+QListWidget::Item{
+	padding-top:1px; padding-bottom:2px; 
+}
+
+QListWidget::Item:hover{
+	background:skyblue; 
+}
+	QListWidget::item:selected:!active{
+border-width:0px;  
+}
+</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="lineWidth">
+                 <number>1</number>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustIgnored</enum>
+                </property>
+                <property name="autoScroll">
+                 <bool>true</bool>
+                </property>
+                <property name="autoScrollMargin">
+                 <number>16</number>
+                </property>
+                <property name="tabKeyNavigation">
+                 <bool>false</bool>
+                </property>
+                <property name="defaultDropAction">
+                 <enum>Qt::CopyAction</enum>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="flow">
+                 <enum>QListView::TopToBottom</enum>
+                </property>
+                <property name="isWrapping" stdset="0">
+                 <bool>false</bool>
+                </property>
+                <property name="resizeMode">
+                 <enum>QListView::Fixed</enum>
+                </property>
+                <property name="viewMode">
+                 <enum>QListView::ListMode</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>false</bool>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主轴承温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱轮毂侧轴承温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱发电机侧轴承温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱油温</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱冷却器入口油温</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱冷却器出口油温</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵出口温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵入口温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A1口温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A2口温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A3口温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A4口温度</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A1口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A2口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A3口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱A4口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵1_1出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵1_2出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵2_1出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵2_2出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵滤芯压差1_1</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵滤芯压差1_2</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵滤芯压差2_1</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱主泵滤芯压差2_2</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱冷却泵出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱过滤泵出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱油位</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵1温差</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵2温差</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵1出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵1入口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵2出口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵2入口压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵1压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>齿轮箱水泵2压力</string>
+                 </property>
+                 <property name="checkState">
+                  <enum>Unchecked</enum>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTabWidget" name="gb_tabWidget">
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QTabWidget::pane {
+	border:2px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:8px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+	
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-8px;
+	margin-right:-8px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+                </property>
+                <property name="tabPosition">
+                 <enum>QTabWidget::North</enum>
+                </property>
+                <property name="tabShape">
+                 <enum>QTabWidget::Rounded</enum>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <property name="elideMode">
+                 <enum>Qt::ElideNone</enum>
+                </property>
+                <property name="tabsClosable">
+                 <bool>false</bool>
+                </property>
+                <property name="movable">
+                 <bool>true</bool>
+                </property>
+                <widget class="QWidget" name="tab1">
+                 <attribute name="title">
+                  <string>齿轮箱主轴承温度</string>
+                 </attribute>
+                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb1_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab2">
+                 <attribute name="title">
+                  <string>齿轮箱轮毂侧轴承温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb2_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab3">
+                 <attribute name="title">
+                  <string>齿轮箱发电机侧轴承温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb3_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab4">
+                 <attribute name="title">
+                  <string>齿轮箱油温</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb4_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab5">
+                 <attribute name="title">
+                  <string>齿轮箱冷却器入口油温</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb5_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab6">
+                 <attribute name="title">
+                  <string>齿轮箱冷却器出口油温</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb6_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab7">
+                 <attribute name="title">
+                  <string>齿轮箱水泵出口温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_8">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb7_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab8">
+                 <attribute name="title">
+                  <string>齿轮箱水泵入口温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb8_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab9">
+                 <attribute name="title">
+                  <string>齿轮箱A1口温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_10">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb9_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab10">
+                 <attribute name="title">
+                  <string>齿轮箱A2口温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_11">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb10_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab11">
+                 <attribute name="title">
+                  <string>齿轮箱A3口温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_12">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb11_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab12">
+                 <attribute name="title">
+                  <string>齿轮箱A4口温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_13">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb12_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab13">
+                 <attribute name="title">
+                  <string>齿轮箱A1口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb13_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab14">
+                 <attribute name="title">
+                  <string>齿轮箱A2口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_15">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb14_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab15">
+                 <attribute name="title">
+                  <string>齿轮箱A3口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_16">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb15graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab16">
+                 <attribute name="title">
+                  <string>齿轮箱A4口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_17">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb16_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab17">
+                 <attribute name="title">
+                  <string>齿轮箱主泵1_1出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_20">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb17_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab18">
+                 <attribute name="title">
+                  <string>齿轮箱主泵1_2出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_19">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb18_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab19">
+                 <attribute name="title">
+                  <string>齿轮箱主泵2_1出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_18">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb19_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab20">
+                 <attribute name="title">
+                  <string>齿轮箱主泵2_2出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_21">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb20_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab21">
+                 <attribute name="title">
+                  <string>齿轮箱主泵滤芯压差1_1</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_22">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb21_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab22">
+                 <attribute name="title">
+                  <string> 齿轮箱主泵滤芯压差1_2</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_23">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb22_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab23">
+                 <attribute name="title">
+                  <string>齿轮箱主泵滤芯压差2_1</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_24">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb23_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab24">
+                 <attribute name="title">
+                  <string>齿轮箱主泵滤芯压差2_2</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_25">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb24_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab25">
+                 <attribute name="title">
+                  <string>齿轮箱冷却泵出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_26">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb25_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab26">
+                 <attribute name="title">
+                  <string>齿轮箱过滤泵出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_27">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb26_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab27">
+                 <attribute name="title">
+                  <string>齿轮箱油位</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_28">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb27_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab28">
+                 <attribute name="title">
+                  <string>齿轮箱水泵1温差</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_29">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb28_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab29">
+                 <attribute name="title">
+                  <string>齿轮箱水泵2温差</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_30">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb29_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab30">
+                 <attribute name="title">
+                  <string>齿轮箱水泵1出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_31">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb30_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab31">
+                 <attribute name="title">
+                  <string>齿轮箱水泵1入口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_32">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb31_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab32">
+                 <attribute name="title">
+                  <string>齿轮箱水泵2出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_33">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb32_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab33">
+                 <attribute name="title">
+                  <string>齿轮箱水泵2入口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_34">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb33_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab34">
+                 <attribute name="title">
+                  <string>齿轮箱水泵1压力</string>
+                 </attribute>
+                 <layout class="QHBoxLayout" name="horizontalLayout_18">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb34_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab35">
+                 <attribute name="title">
+                  <string>齿轮箱水泵2压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_35">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="gb35_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="ge_tab">
+          <attribute name="icon">
+           <iconset>
+            <normalon>:/模型/发电机.png</normalon>
+           </iconset>
+          </attribute>
+          <attribute name="title">
+           <string>发电机预警模型</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QGroupBox" name="ge_groupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="2,8">
+              <item>
+               <widget class="QListWidget" name="ge_listWidget">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QListWidget{
+	border:1px solid gray; color:black; 
+	CheckState:unchecked;
+}
+
+QListWidget::Item{
+	padding-top:1px; padding-bottom:2px; 
+}
+
+QListWidget::Item:hover{
+	background:skyblue; 
+}
+	QListWidget::item:selected:!active{
+border-width:0px;  
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>发电机绕组PT100接线</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机绕组温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机齿轮箱侧轴承温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机机舱侧轴承温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机轴承温度传感器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机内冷入口温度传感器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机内冷出口温度传感器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机外冷入口温度传感器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机外冷出口温度传感器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机内冷入口温</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机内冷出口温</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机内冷温差</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>发电机外冷温差</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTabWidget" name="ge_tabWidget">
+                <property name="styleSheet">
+                 <string notr="true">QTabWidget::pane {
+	border:2px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:8px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+	
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-8px;
+	margin-right:-8px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+                </property>
+                <property name="tabPosition">
+                 <enum>QTabWidget::North</enum>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="tab1_2">
+                 <attribute name="title">
+                  <string>发电机绕组PT100接线</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_42">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge1_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab2_2">
+                 <attribute name="title">
+                  <string>发电机绕组温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_41">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge2_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab3_2">
+                 <attribute name="title">
+                  <string>发电机齿轮箱侧轴承温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_40">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge3_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab4_2">
+                 <attribute name="title">
+                  <string>发电机机舱侧轴承温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_39">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge4_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab5_2">
+                 <attribute name="title">
+                  <string>发电机轴承温度传感器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_38">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge5_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab6_2">
+                 <attribute name="title">
+                  <string>发电机内冷入口温度传感器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_37">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge6_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab7_2">
+                 <attribute name="title">
+                  <string>发电机内冷出口温度传感器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_36">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge7_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab8_5">
+                 <attribute name="title">
+                  <string>发电机外冷入口温度传感器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_70">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge8_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab9_4">
+                 <attribute name="title">
+                  <string>发电机外冷出口温度传感器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_71">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge9_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab10_3">
+                 <attribute name="title">
+                  <string>发电机内冷入口温</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_72">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge10_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab11_2">
+                 <attribute name="title">
+                  <string>发电机内冷出口温</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_73">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge11_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab12_2">
+                 <attribute name="title">
+                  <string>发电机内冷温差</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_74">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge12_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab13_2">
+                 <attribute name="title">
+                  <string>发电机外冷温差</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_75">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="ge13_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pitch_tab">
+          <attribute name="icon">
+           <iconset>
+            <normalon>:/模型/桨叶.png</normalon>
+           </iconset>
+          </attribute>
+          <attribute name="title">
+           <string>变桨预警模型</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QGroupBox" name="pitch_groupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="2,8">
+              <item>
+               <widget class="QListWidget" name="pitch_listWidget">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QListWidget{
+	border:1px solid gray; color:black; 
+	CheckState:unchecked;
+}
+
+QListWidget::Item{
+	padding-top:1px; padding-bottom:2px; 
+}
+
+QListWidget::Item:hover{
+	background:skyblue; 
+}
+	QListWidget::item:selected:!active{
+border-width:0px;  
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>桨叶顺桨</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>叶轮转速</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>桨叶电机温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>桨叶轴控箱温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>桨叶轴控箱温差</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变桨驱动器散热器温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>桨叶电池箱温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>桨叶电池箱温差</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTabWidget" name="pitch_tabWidget">
+                <property name="styleSheet">
+                 <string notr="true">QTabWidget::pane {
+	border:2px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:8px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+	
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-8px;
+	margin-right:-8px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+                </property>
+                <property name="tabPosition">
+                 <enum>QTabWidget::North</enum>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="tab1_3">
+                 <attribute name="title">
+                  <string>桨叶顺桨</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_50">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch1_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab2_3">
+                 <attribute name="title">
+                  <string>叶轮转速</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_49">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch2_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab3_3">
+                 <attribute name="title">
+                  <string>桨叶电机温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_48">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch3_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab4_3">
+                 <attribute name="title">
+                  <string>桨叶轴控箱温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_47">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch4_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab5_3">
+                 <attribute name="title">
+                  <string>桨叶轴控箱温差</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_46">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch5_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab6_3">
+                 <attribute name="title">
+                  <string>变桨驱动器散热器温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_45">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch6_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab7_3">
+                 <attribute name="title">
+                  <string>桨叶电池箱温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_44">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch7_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab8_2">
+                 <attribute name="title">
+                  <string>桨叶电池箱温差</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_43">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="pitch8_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="co_tab">
+          <attribute name="icon">
+           <iconset>
+            <normalon>:/模型/变流器.png</normalon>
+           </iconset>
+          </attribute>
+          <attribute name="title">
+           <string>变频器预警模型</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QGroupBox" name="co_groupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="2,8">
+              <item>
+               <widget class="QListWidget" name="co_listWidget">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QListWidget{
+	border:1px solid gray; color:black; 
+	CheckState:unchecked;
+}
+
+QListWidget::Item{
+	padding-top:1px; padding-bottom:2px; 
+}
+
+QListWidget::Item:hover{
+	background:skyblue; 
+}
+	QListWidget::item:selected:!active{
+border-width:0px;  
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>变频器主机IGBT温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变频器从机IGBT温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变流器发电机转速</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变频器主机冷却液温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变频器从机冷却液温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变频器主机冷却液压力</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>变频器从机冷却液压力</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTabWidget" name="co_tabWidget">
+                <property name="styleSheet">
+                 <string notr="true">QTabWidget::pane {
+	border:2px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:8px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+	
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-8px;
+	margin-right:-8px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+                </property>
+                <property name="tabPosition">
+                 <enum>QTabWidget::North</enum>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="tab1_5">
+                 <attribute name="title">
+                  <string>变频器主机IGBT温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_82">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co1_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab2_5">
+                 <attribute name="title">
+                  <string>变频器从机IGBT温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_81">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co2_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab3_6">
+                 <attribute name="title">
+                  <string>变流器发电机转速</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_80">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co3_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab4_7">
+                 <attribute name="title">
+                  <string>变频器从机冷却液温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_79">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co4_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab5_6">
+                 <attribute name="title">
+                  <string>变频器主机冷却液温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_78">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co5_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab6_7">
+                 <attribute name="title">
+                  <string>变频器主机冷却液压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_77">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co6_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab7_5">
+                 <attribute name="title">
+                  <string>变频器从机冷却液压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_76">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="co7_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="hy_tab">
+          <attribute name="icon">
+           <iconset>
+            <normalon>:/模型/液压.png</normalon>
+           </iconset>
+          </attribute>
+          <attribute name="title">
+           <string>液压预警模型</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QGroupBox" name="hy_groupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="2,8">
+              <item>
+               <widget class="QListWidget" name="hy_listWidget">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QListWidget{
+	border:1px solid gray; color:black; 
+	CheckState:unchecked;
+}
+
+QListWidget::Item{
+	padding-top:1px; padding-bottom:2px; 
+}
+
+QListWidget::Item:hover{
+	background:skyblue; 
+}
+	QListWidget::item:selected:!active{
+border-width:0px;  
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>液压系统压力</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>液压泵频繁启停</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>偏航半释放压力1</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>偏航半释放压力2</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>液压系统油温</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>液压泵出口压力</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>液压叶轮锁定压力</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>叶轮锁定储能罐压力</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>偏航压力</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>偏航制动器1</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>偏航制动器2</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTabWidget" name="hy_tabWidget">
+                <property name="styleSheet">
+                 <string notr="true">QTabWidget::pane {
+	border:2px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:8px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+	
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-8px;
+	margin-right:-8px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+                </property>
+                <property name="tabPosition">
+                 <enum>QTabWidget::North</enum>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="tab1_4">
+                 <attribute name="title">
+                  <string>液压系统压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_51">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy1_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab2_4">
+                 <attribute name="title">
+                  <string>液压泵频繁启停</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_52">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy2_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab3_4">
+                 <attribute name="title">
+                  <string>偏航半释放压力1</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_53">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy3_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab4_4">
+                 <attribute name="title">
+                  <string>偏航半释放压力2</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_54">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy4_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab5_4">
+                 <attribute name="title">
+                  <string>液压系统油温</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_55">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy5_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab6_4">
+                 <attribute name="title">
+                  <string>液压泵出口压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_56">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy6_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab7_4">
+                 <attribute name="title">
+                  <string>液压叶轮锁定压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_57">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy7_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab8_3">
+                 <attribute name="title">
+                  <string>叶轮锁定储能罐压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_58">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy8_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab9_2">
+                 <attribute name="title">
+                  <string>偏航压力</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_59">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy9_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab10_2">
+                 <attribute name="title">
+                  <string>偏航制动器1</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_60">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy10_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab11_3">
+                 <attribute name="title">
+                  <string>偏航制动器2</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_61">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="hy11_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="se_tab">
+          <attribute name="icon">
+           <iconset>
+            <normalon>:/模型/传感器 感应器.png</normalon>
+           </iconset>
+          </attribute>
+          <attribute name="title">
+           <string>传感器预警模型</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QGroupBox" name="se_groupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="2,8">
+              <item>
+               <widget class="QListWidget" name="se_listWidget">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QListWidget{
+	border:1px solid gray; color:black; 
+	CheckState:unchecked;
+}
+
+QListWidget::Item{
+	padding-top:1px; padding-bottom:2px; 
+}
+
+QListWidget::Item:hover{
+	background:skyblue; 
+}
+	QListWidget::item:selected:!active{
+border-width:0px;  
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>塔基变压器温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>塔基柜温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>塔基柜加热器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>机舱动力柜温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>机舱动力柜加热器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>机舱信号柜温度</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>机舱信号柜加热器</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>偏航驱动柜温度</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTabWidget" name="se_tabWidget">
+                <property name="styleSheet">
+                 <string notr="true">QTabWidget::pane {
+	border:2px solid #C3C7CB;
+}
+
+
+/* 标签外形设置 */
+QTabBar::tab {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	border:1px solid #C4C4C3;
+	border-bottom-color:#C2C7CB;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	min-width:50px;
+	padding:8px;
+}
+
+/* 标签被选中时或鼠标悬浮时 */
+QTabBar::tab:selected,QTabBar::tab:hover {
+	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+	
+}
+
+/* 标签被选中时 */
+QTabBar::tab:selected {
+	border-color:#9B9B9B;
+	border-bottom-color:#C2C7CB;
+	background-color: rgb(85, 255, 127);
+
+}
+
+/* 标签未被选中时 */
+QTabBar::tab:!selected {
+	margin-top:2px;
+}
+
+/* 标签被选中时,外框向外扩大 */
+QTabBar::tab:selected {
+	margin-left:-8px;
+	margin-right:-8px;
+}
+
+/* 最左边的标签被选中时,外框不变化 */
+QTabBar::tab:first:selected {
+	margin-left:0px;
+}
+
+/* 最右边的标签被选中时,外框不变化 */
+QTabBar::tab:last:selected {
+	margin-right:0;
+}
+	
+</string>
+                </property>
+                <property name="tabPosition">
+                 <enum>QTabWidget::North</enum>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="tab1_6">
+                 <attribute name="title">
+                  <string>塔基变压器温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_62">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se1_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab2_6">
+                 <attribute name="title">
+                  <string>塔基柜温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_63">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se2_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab3_5">
+                 <attribute name="title">
+                  <string>塔基柜加热器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_64">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se3_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab4_5">
+                 <attribute name="title">
+                  <string>机舱动力柜温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_65">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se4_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab5_5">
+                 <attribute name="title">
+                  <string>机舱动力柜加热器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_66">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se5_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab6_5">
+                 <attribute name="title">
+                  <string>机舱信号柜温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_67">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se6_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab_7">
+                 <property name="styleSheet">
+                  <string notr="true">font-family: &quot;Microsoft YaHei&quot;;
+font-size: 14px;
+color: #BDC8E2;
+font-style: italic;
+font-weight: bold;</string>
+                 </property>
+                 <attribute name="title">
+                  <string>机舱信号柜加热器</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_68">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se7_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab8_4">
+                 <attribute name="title">
+                  <string>偏航驱动柜温度</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_69">
+                  <item>
+                   <widget class="GraphicsLayoutWidget" name="se8_graphicsView"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="father_horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+     </layout>
+    </item>
+    <item>
+     <widget class="QProgressBar" name="progressBar">
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/*Qmenu Style Sheets*/
+ QMenu {
+     background-color: white; /* sets background of the menu 设置整个菜单区域的背景色，我用的是白色：white*/
+     border: 1px solid white;/*整个菜单区域的边框粗细、样式、颜色*/
+ }
+  
+ QMenu::item {
+     /* sets background of menu item. set this to something non-transparent
+         if you want menu color and menu item color to be different */
+     background-color: transparent;
+     padding:8px 32px;/*设置菜单项文字上下和左右的内边距，效果就是菜单中的条目左右上下有了间隔*/
+     margin:0px 8px;/*设置菜单项的外边距*/
+     border-bottom:1px solid #DBDBDB;/*为菜单项之间添加横线间隔*/
+ }
+  
+ QMenu::item:selected { /* when user selects item using mouse or keyboard */
+     background-color: #2dabf9;/*这一句是设置菜单项鼠标经过选中的样式*/
+ }</string>
+   </property>
+   <widget class="QMenu" name="file_menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="import_data_action"/>
+    <addaction name="export_action"/>
+    <addaction name="separator"/>
+    <addaction name="unpack_action"/>
+   </widget>
+   <widget class="QMenu" name="setting_menu">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <widget class="QMenu" name="menu">
+     <property name="title">
+      <string>修改控制逻辑</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../config/icon/ico.qrc">
+       <normaloff>:/设置/修改控制逻辑.png</normaloff>:/设置/修改控制逻辑.png</iconset>
+     </property>
+     <addaction name="action_4"/>
+     <addaction name="action_5"/>
+     <addaction name="action_6"/>
+     <addaction name="action_7"/>
+     <addaction name="action_8"/>
+     <addaction name="action_9"/>
+    </widget>
+    <addaction name="add_project_action"/>
+    <addaction name="refactor_project_action"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="menu"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="help_action"/>
+    <addaction name="about_action"/>
+   </widget>
+   <addaction name="file_menu"/>
+   <addaction name="setting_menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 85, 255);</string>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 0);</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="Terminal"/>
+   <addaction name="Log"/>
+  </widget>
+  <action name="import_data_action">
+   <property name="icon">
+    <iconset resource="../config/icon/ico.qrc">
+     <normaloff>:/文件/打开.png</normaloff>
+     <normalon>:/文件/打开.png</normalon>:/文件/打开.png</iconset>
+   </property>
+   <property name="text">
+    <string>导入数据</string>
+   </property>
+  </action>
+  <action name="add_project_action">
+   <property name="icon">
+    <iconset resource="../config/icon/ico.qrc">
+     <normaloff>:/设置/添加.png</normaloff>:/设置/添加.png</iconset>
+   </property>
+   <property name="text">
+    <string>添加项目</string>
+   </property>
+  </action>
+  <action name="delete_project_action">
+   <property name="text">
+    <string>删除项目</string>
+   </property>
+  </action>
+  <action name="refactor_project_action">
+   <property name="icon">
+    <iconset resource="../config/icon/ico.qrc">
+     <normaloff>:/设置/修 改.png</normaloff>:/设置/修 改.png</iconset>
+   </property>
+   <property name="text">
+    <string>修改项目标签</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>齿轮箱预警模型</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>发电机预警模型</string>
+   </property>
+  </action>
+  <action name="action_6">
+   <property name="text">
+    <string>变桨预警模型</string>
+   </property>
+  </action>
+  <action name="action_7">
+   <property name="text">
+    <string>变频器预警模型</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>液压预警模型</string>
+   </property>
+  </action>
+  <action name="action_9">
+   <property name="text">
+    <string>传感器预警模型</string>
+   </property>
+  </action>
+  <action name="export_action">
+   <property name="icon">
+    <iconset resource="../config/icon/ico.qrc">
+     <normaloff>:/文件/另存为.png</normaloff>
+     <normalon>:/文件/另存为.png</normalon>:/文件/另存为.png</iconset>
+   </property>
+   <property name="text">
+    <string>导出数据</string>
+   </property>
+  </action>
+  <action name="action_14">
+   <property name="text">
+    <string>解压文件</string>
+   </property>
+  </action>
+  <action name="unpack_action">
+   <property name="icon">
+    <iconset resource="../config/icon/ico.qrc">
+     <normaloff>:/文件/解压包.png</normaloff>:/文件/解压包.png</iconset>
+   </property>
+   <property name="text">
+    <string>解压并合并</string>
+   </property>
+  </action>
+  <action name="Terminal">
+   <property name="text">
+    <string>控制台</string>
+   </property>
+  </action>
+  <action name="Log">
+   <property name="text">
+    <string>日志</string>
+   </property>
+  </action>
+  <action name="help_action">
+   <property name="text">
+    <string>帮助</string>
+   </property>
+  </action>
+  <action name="about_action">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsLayoutWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../config/icon/ico.qrc"/>
+ </resources>
+ <connections/>
+</ui>

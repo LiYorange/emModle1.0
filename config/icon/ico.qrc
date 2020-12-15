@@ -1,0 +1,32 @@
+<RCC>
+  <qresource prefix="下拉菜单">
+    <file>ZHX_下拉菜单.png</file>
+  </qresource>
+  <qresource prefix="图标">
+    <file>风机.png</file>
+  </qresource>
+  <qresource prefix="文件">
+    <file>解压包.png</file>
+    <file>另存为.png</file>
+    <file>打开.png</file>
+  </qresource>
+  <qresource prefix="设置">
+    <file>修改控制逻辑.png</file>
+    <file>添加.png</file>
+    <file>修 改.png</file>
+  </qresource>
+  <qresource prefix="模型">
+    <file>变流器.png</file>
+    <file>齿轮箱.png</file>
+    <file>传感器 感应器.png</file>
+    <file>发电机.png</file>
+    <file>桨叶.png</file>
+    <file>液压.png</file>
+  </qresource>
+  <qresource prefix="日志">
+    <file>日志.png</file>
+  </qresource>
+  <qresource prefix="工具栏">
+    <file>工具栏.png</file>
+  </qresource>
+</RCC>
